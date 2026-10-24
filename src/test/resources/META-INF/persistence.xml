@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Test-only. The two units mirror upstream's (../postgresql-demodb-persistence/src/test/resources/META-INF/persistence.xml);
+  keep them in step. Hibernate only; see the pom for why there is no EclipseLink here.
+
+  No repository names a unit (@Repository(dataStore = ...)): the generated <Name>_ takes its factory from the
+  container, which the test bases produce from the unit they run on; see __Repository_TestBase.
+
+  Both units list the entities of this project and upstream's two converters, as upstream's do; with
+  exclude-unlisted-classes, an entity not listed is not managed, and a converter not listed is not found.
+  -->
+<!-- https://jakarta.ee/xml/ns/persistence/ -->
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_2.xsd"
+             version="3.2">
+  <persistence-unit name="demonstration-test" transaction-type="RESOURCE_LOCAL">
+    <description>Persistence Unit for an In-Memory DB</description>
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <class>com.github.jinahya.postgresql.demodb.persistence.converter.IntegerListArrayConverter</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.converter.IntervalConverter</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.AirplaneData</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.AirportData</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.Booking</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.Ticket</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.Flight</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.Route</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.RouteId</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.Seat</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.Segment</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.BoardingPass</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.Airplane</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.Airport</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.Timetable</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <shared-cache-mode>NONE</shared-cache-mode>
+    <validation-mode>CALLBACK</validation-mode>
+    <properties>
+      <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
+      <!-- https://www.h2database.com/html/features.html#compatibility -->
+      <!-- the H2 upstream's in-memory unit runs on: PostgreSQL mode, and NULL sorting last on ASC as PostgreSQL has it -->
+      <property name="jakarta.persistence.jdbc.url"
+                value="jdbc:h2:mem:;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH"/>
+      <property name="jakarta.persistence.jdbc.user" value="sa"/>
+      <property name="jakarta.persistence.jdbc.password" value="password"/>
+      <property name="hibernate.format_sql" value="true"/>
+      <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+      <property name="hibernate.highlight_sql" value="true"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.use_sql_comment" value="true"/>
+    </properties>
+  </persistence-unit>
+  <persistence-unit name="demonstration-it" transaction-type="RESOURCE_LOCAL">
+    <description>Persistence Unit for a Physical Database</description>
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <class>com.github.jinahya.postgresql.demodb.persistence.converter.IntegerListArrayConverter</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.converter.IntervalConverter</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.AirplaneData</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.AirportData</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.Booking</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.Ticket</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.Flight</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.Route</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.RouteId</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.Seat</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.Segment</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.BoardingPass</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.Airplane</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.Airport</class>
+    <class>com.github.jinahya.postgresql.demodb.persistence.Timetable</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <shared-cache-mode>NONE</shared-cache-mode>
+    <validation-mode>CALLBACK</validation-mode>
+    <properties>
+      <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+      <!-- the database of upstream's compose.yaml; see its _docker_compose_up.sh -->
+      <!-- the dump creates database `demo` and puts everything in schema `bookings`, which it also makes the -->
+      <!-- database's search_path, so unqualified table names resolve there -->
+      <!-- stringtype=unspecified: a String bound for a tstzrange, point, jsonb, integer[] or interval column is sent -->
+      <!-- untyped, so that the server casts it; see upstream's README.md, "Column types the providers differ on" -->
+      <property name="jakarta.persistence.jdbc.url"
+                value="jdbc:postgresql://localhost:5432/demo?stringtype=unspecified"/>
+      <property name="jakarta.persistence.jdbc.user" value="postgres"/>
+      <property name="jakarta.persistence.jdbc.password" value="password"/>
+      <!-- The session's time zone, UTC as the container's own psql sessions have it, so that a month or a day a -->
+      <!-- query takes out of a timestamptz (extract(month from f.scheduledDeparture)) is the one the exercises' SQL -->
+      <!-- shows. The driver sets the session's TimeZone to the JVM's as a startup parameter, which the server -->
+      <!-- applies after any `options=-c TimeZone=...` of the URL, so the URL cannot do this; a statement on each -->
+      <!-- new connection can. The sibling -spring-data does the same through Hikari's connection-init-sql. -->
+      <property name="hibernate.connection.init_sql" value="SET TIME ZONE 'UTC'"/>
+      <!-- The sample data is the fixture the tests read; nothing here may touch the schema. -->
+      <property name="hibernate.hbm2ddl.auto" value="none"/>
+      <property name="hibernate.format_sql" value="true"/>
+      <property name="hibernate.highlight_sql" value="true"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.use_sql_comment" value="true"/>
+    </properties>
+  </persistence-unit>
+</persistence>
