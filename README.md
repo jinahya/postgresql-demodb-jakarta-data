@@ -28,7 +28,7 @@ so unlike upstream this build has no provider profiles.
 Upstream owns the compose file:
 
 ```shell
-$ cd ../postgresql-demodb-persistence && ./_docker_compose_up.sh
+$ cd ../../postgresql-demodb-persistence && ./_docker_compose_up.sh
 ```
 
 brings up `onacit/postgresql-demodb:18-alpine-3m` on `localhost:5432` as `postgres` / `password`, with the
@@ -46,7 +46,7 @@ $ ./_mvn_verify_notests.sh    # no database needed
 ```
 
 The upstream jar, and its `test-companion` jar of randomizers and persisters, are local `SNAPSHOT`s:
-`./mvnw -DskipTests install` in `../postgresql-demodb-persistence` first.
+`./mvnw -DskipTests install` in `../../postgresql-demodb-persistence` first.
 
 ## The exercises
 

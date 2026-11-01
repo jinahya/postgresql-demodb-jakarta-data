@@ -46,7 +46,7 @@ background is Java EE 5/6, so plain DAO-style explanations and container-free co
 
 ## Upstream, and the entities
 
-The sibling checkout `../postgresql-demodb-persistence` publishes, at `0.0.1-SNAPSHOT`, a jar of **mapped
+The upstream checkout `../../postgresql-demodb-persistence` publishes, at `0.0.1-SNAPSHOT`, a jar of **mapped
 superclasses, their generated static metamodel (`MappedFlight_`, ...) and two converters**
 (`IntegerListArrayConverter` for `integer[]`, `IntervalConverter` for `interval`), and a second jar of the same
 artifact classified `test-companion` (`*_Randomizer` / `*_Persister` classes, and the `__Random_TestUtils` helper
@@ -76,7 +76,7 @@ its own.
   (`SET TIME ZONE 'UTC'` in the `demonstration-it` unit), so `extract(month from f.scheduledDeparture)` gives the
   month upstream's exercises show. The driver sends the JVM's zone as the session's `TimeZone` startup parameter,
   which the server applies after any `options=-c TimeZone=...` of the URL, so the URL cannot do it.
-- Upstream's `../postgresql-demodb-persistence/EXERCISES.asciidoc` / `EXERCISES.yaml` is the catalogue of query
+- Upstream's `../../postgresql-demodb-persistence/EXERCISES.asciidoc` / `EXERCISES.yaml` is the catalogue of query
   exercises the sibling projects answer: for each repository, the Basic and the Intermediate pick of the exercise's
   section become one method each, the exercise id named in the method's javadoc, with the exercise's order written
   in the query and its `LIMIT n` left to the caller's `PageRequest.ofSize(n)`. A result that is not an entity is a
@@ -84,7 +84,7 @@ its own.
 - Identifiers are assigned (`airplaneCode`, `airportCode`, `bookRef`, `ticketNo`, the composite ones), except
   `flights.flight_id`, which is `IDENTITY`. `Route` has no key of its own in the schema; its `@EmbeddedId` is
   `RouteId` (`routeNo`, `validity`), and the inherited `routeNo`/`validity` attributes are read-only there.
-- Read `../postgresql-demodb-persistence/README.md` before touching anything about the mappings.
+- Read `../../postgresql-demodb-persistence/README.md` before touching anything about the mappings.
 
 ## Build
 
@@ -109,7 +109,7 @@ that stops the ITs. Both plugins stop after the first failing class (`skipAfterF
 the build on dependency non-convergence, a JDK below 25, and a `-P` naming a profile that does not exist.
 
 **The integration tests need the demonstration database container upstream owns**: run
-`../postgresql-demodb-persistence/_docker_compose_up.sh` (Ctrl-C takes it down with its data). It runs
+`../../postgresql-demodb-persistence/_docker_compose_up.sh` (Ctrl-C takes it down with its data). It runs
 `onacit/postgresql-demodb:18-alpine-3m` on `localhost:5432`, database `demo`, `postgres` / `password`, with three
 months of flights loaded on first start, which takes about a minute. The `demonstration-it` unit connects there with
 `hbm2ddl.auto=none`: the sample data is the fixture the ITs read, and nothing may touch the schema or leave rows

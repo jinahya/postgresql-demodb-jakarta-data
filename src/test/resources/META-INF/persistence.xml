@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Test-only. The two units mirror upstream's (../postgresql-demodb-persistence/src/test/resources/META-INF/persistence.xml);
+  Test-only. The two units mirror upstream's (../../postgresql-demodb-persistence/src/test/resources/META-INF/persistence.xml);
   keep them in step. Hibernate only; see the pom for why there is no EclipseLink here.
 
   No repository names a unit (@Repository(dataStore = ...)): the generated <Name>_ takes its factory from the

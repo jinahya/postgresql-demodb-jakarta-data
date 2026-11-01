@@ -5,7 +5,7 @@
 # The ITs talk to a real PostgreSQL at localhost:5432/demo (the `demonstration-it` unit), which upstream owns; bring
 # it up with
 #
-#     cd ../postgresql-demodb-persistence && ./_docker_compose_up.sh
+#     cd ../../postgresql-demodb-persistence && ./_docker_compose_up.sh
 #
 # first; otherwise they fail on the connection rather than on a query.
 #
