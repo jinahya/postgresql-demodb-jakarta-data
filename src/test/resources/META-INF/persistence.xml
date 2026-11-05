@@ -81,7 +81,7 @@
       <property name="jakarta.persistence.jdbc.url"
                 value="jdbc:postgresql://localhost:5432/demo?stringtype=unspecified"/>
       <property name="jakarta.persistence.jdbc.user" value="postgres"/>
-      <property name="jakarta.persistence.jdbc.password" value="password"/>
+      <property name="jakarta.persistence.jdbc.password" value="Passw0rd!"/>
       <!-- The session's time zone, UTC as the container's own psql sessions have it, so that a month or a day a -->
       <!-- query takes out of a timestamptz (extract(month from f.scheduledDeparture)) is the one the exercises' SQL -->
       <!-- shows. The driver sets the session's TimeZone to the JVM's as a startup parameter, which the server -->

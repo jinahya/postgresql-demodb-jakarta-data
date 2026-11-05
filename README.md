@@ -31,7 +31,7 @@ Upstream owns the compose file:
 $ cd ../../postgresql-demodb-persistence && ./_docker_compose_up.sh
 ```
 
-brings up `onacit/postgresql-demodb:18-alpine-3m` on `localhost:5432` as `postgres` / `password`, with the
+brings up `onacit/postgresql-demodb:18-alpine-3m` on `localhost:5432` as `postgres` / `Passw0rd!`, with the
 demonstration database loaded (three months of flights); Ctrl-C takes it down again. The `demonstration-it` unit of
 [`persistence.xml`](src/test/resources/META-INF/persistence.xml) points there, and sets each session's time zone
 to UTC, as the container's own `psql` sessions have it, so that a month or a day a query takes out of a

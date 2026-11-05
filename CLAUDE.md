@@ -110,7 +110,7 @@ the build on dependency non-convergence, a JDK below 25, and a `-P` naming a pro
 
 **The integration tests need the demonstration database container upstream owns**: run
 `../../postgresql-demodb-persistence/_docker_compose_up.sh` (Ctrl-C takes it down with its data). It runs
-`onacit/postgresql-demodb:18-alpine-3m` on `localhost:5432`, database `demo`, `postgres` / `password`, with three
+`onacit/postgresql-demodb:18-alpine-3m` on `localhost:5432`, database `demo`, `postgres` / `Passw0rd!`, with three
 months of flights loaded on first start, which takes about a minute. The `demonstration-it` unit connects there with
 `hbm2ddl.auto=none`: the sample data is the fixture the ITs read, and nothing may touch the schema or leave rows
 behind.
