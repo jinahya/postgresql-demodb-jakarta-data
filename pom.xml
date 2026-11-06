@@ -86,7 +86,7 @@
       https://central.sonatype.com/artifact/org.hibernate.orm/hibernate-platform/versions
       https://docs.hibernate.org/orm/7.4/repositories/html_single/Hibernate_Data_Repositories.html
       -->
-    <version.org.hibernate.orm>7.4.12.Final</version.org.hibernate.orm>
+    <version.org.hibernate.orm>7.4.15.Final</version.org.hibernate.orm>
 
     <!-- Local SNAPSHOT only: `./mvnw -DskipTests install` the sibling checkout to pick up a change there. -->
     <version.postgres-demonstration-persistence>0.0.1-SNAPSHOT</version.postgres-demonstration-persistence>
@@ -96,7 +96,7 @@
       compiles here against its test-companion jar is what that jar was compiled against.
       -->
     <!-- https://central.sonatype.com/artifact/io.github.jinahya/jinahya-persistence-test-utils/versions -->
-    <version.jinahya-persistence>0.6.7</version.jinahya-persistence>
+    <version.jinahya-persistence>0.6.9</version.jinahya-persistence>
     <!-- https://central.sonatype.com/artifact/uk.co.jemos.podam/podam/versions -->
     <version.uk.co.jemos.podam>8.0.2.RELEASE</version.uk.co.jemos.podam>
     <!-- https://central.sonatype.com/artifact/org.projectlombok/lombok/versions -->
@@ -107,7 +107,7 @@
     <!-- https://central.sonatype.com/artifact/com.h2database/h2/versions -->
     <version.com.h2database>2.5.252</version.com.h2database>
     <!-- https://central.sonatype.com/artifact/ch.qos.logback/logback-classic/versions -->
-    <version.ch.qos.logback>1.6.5</version.ch.qos.logback>
+    <version.ch.qos.logback>1.6.6</version.ch.qos.logback>
     <!-- https://central.sonatype.com/artifact/org.slf4j/slf4j-bom/versions -->
     <version.org.slf4j>2.0.20</version.org.slf4j>
     <!-- https://central.sonatype.com/artifact/org.junit/junit-bom/versions -->
@@ -118,7 +118,7 @@
     <version.org.mockito>5.24.0</version.org.mockito>
     <!-- hibernate-validator: 9 / expressly: 6 -->
     <!-- https://central.sonatype.com/artifact/org.hibernate.validator/hibernate-validator/versions -->
-    <version.org.hibernate.validator>9.1.4.Final</version.org.hibernate.validator>
+    <version.org.hibernate.validator>9.1.6.Final</version.org.hibernate.validator>
     <!-- https://central.sonatype.com/artifact/org.glassfish.expressly/expressly/versions -->
     <version.org.glassfish.expressly>6.0.0</version.org.glassfish.expressly>
     <!-- weld-junit5 (weld-testing) version, not the Weld version; 5.0.x pulls Weld 6 / CDI 4.1 -->
@@ -129,10 +129,10 @@
     <version.org.jspecify>1.0.1</version.org.jspecify>
 
     <!-- https://central.sonatype.com/artifact/org.apache.maven.plugins/maven-surefire-plugin/versions -->
-    <version.maven-surefire>3.6.0</version.maven-surefire>
+    <version.maven-surefire>3.6.1</version.maven-surefire>
     <version.maven-failsafe>${version.maven-surefire}</version.maven-failsafe>
 
-    <!-- Transitive only; pinned to PROJECTS_VERSIONS.asciidoc of jakarta-persistence-applied-book-projects. -->
+    <!-- Transitive only; pinned to PROJECTS_VERSIONS.asciidoc of jakarta-persistence-applied-book. -->
     <!-- https://central.sonatype.com/artifact/io.github.jinahya/jinahya-object-randomizer/versions -->
     <version.jinahya-object-randomizer>0.0.7</version.jinahya-object-randomizer>
   </properties>
