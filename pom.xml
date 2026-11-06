@@ -132,7 +132,7 @@
     <version.maven-surefire>3.6.0</version.maven-surefire>
     <version.maven-failsafe>${version.maven-surefire}</version.maven-failsafe>
 
-    <!-- Transitive only; pinned to PROJECTS_VERSIONS.asciidoc at the book's root. -->
+    <!-- Transitive only; pinned to PROJECTS_VERSIONS.asciidoc of jakarta-persistence-applied-book-projects. -->
     <!-- https://central.sonatype.com/artifact/io.github.jinahya/jinahya-object-randomizer/versions -->
     <version.jinahya-object-randomizer>0.0.7</version.jinahya-object-randomizer>
   </properties>

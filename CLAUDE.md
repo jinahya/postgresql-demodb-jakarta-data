@@ -76,7 +76,7 @@ its own.
   (`SET TIME ZONE 'UTC'` in the `demonstration-it` unit), so `extract(month from f.scheduledDeparture)` gives the
   month upstream's exercises show. The driver sends the JVM's zone as the session's `TimeZone` startup parameter,
   which the server applies after any `options=-c TimeZone=...` of the URL, so the URL cannot do it.
-- Upstream's `../../postgresql-demodb-persistence/EXERCISES.asciidoc` / `EXERCISES.yaml` is the catalogue of query
+- Upstream's `../../postgresql-demodb-persistence/src/test/sql-exercises/EXERCISES.asciidoc` / `EXERCISES.yaml` is the catalogue of query
   exercises the sibling projects answer: for each repository, the Basic and the Intermediate pick of the exercise's
   section become one method each, the exercise id named in the method's javadoc, with the exercise's order written
   in the query and its `LIMIT n` left to the caller's `PageRequest.ofSize(n)`. A result that is not an entity is a
